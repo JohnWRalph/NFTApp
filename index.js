@@ -3,7 +3,7 @@ const { UserAPI,
     generateKeyPair,
     ConnectorNames } = require("@loopring-web/loopring-sdk")
 const axios = require('axios/dist/browser/axios.cjs');
-Web3 = require("web3")
+const Web3 = require("web3")
 
 
 
