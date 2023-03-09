@@ -1,5 +1,6 @@
-function fetchLoopringNfts () {
-    alert("hi") }
+function fetchLoopringNfts() {
+    alert("hi")
+}
 
 
 var button = document.getElementById("fetchLoopring");
