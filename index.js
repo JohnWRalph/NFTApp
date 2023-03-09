@@ -1,4 +1,4 @@
-const { ethers } = require("ethers");
+
 const { UserAPI,
     generateKeyPair,
     ConnectorNames } = require("@loopring-web/loopring-sdk")
