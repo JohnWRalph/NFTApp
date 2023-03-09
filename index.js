@@ -13,7 +13,7 @@ let address;
 
 async function fetchLoopringNFts() {
     console.log("Button clicked!", window.ethereum.selectedAddress);
-    address = "0x6476AA8A48Ff8A95791Be3aBc81778cEfDbCd96D"
+    address = window.ethereum.selectedAddress
     const userAPI = new UserAPI({
         chainId: 1,
     });
