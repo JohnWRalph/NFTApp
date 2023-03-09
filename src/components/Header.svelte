@@ -23,6 +23,7 @@
       />
       <button id="addressLookUpButton">🔍</button>
       <div />
+      <button id="fetchLoopring">FetchLooprig</button>
     </div>
 
     <div class="headerButtons">
