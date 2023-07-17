@@ -43,9 +43,10 @@ async function fetchSolanaNfts(solanaAddressInput: string): Promise<NFT[]> {
         externalUrl: external_url,
         attributes: metadata.attributes
       };
-      i = i + 1;
+ 
       if (metadata.symbol === "ALERT") {
       } else {
+        i = i + 1;
         domainNfts.push(nft);
       }
 
