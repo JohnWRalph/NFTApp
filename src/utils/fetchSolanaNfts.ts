@@ -12,13 +12,13 @@ async function fetchSolanaNfts(solanaAddressInput: string): Promise<NFT[]> {
     ownerPublickey
   );
   let title;
-  let external_url:string;
-  let i=0;
+  let external_url: string;
+  let i = 0;
   await Promise.all(
     tokenMetadata.map(async function (solNft, index) {
       const n = await fetch(solNft.data.uri);
       const metadata = await n.json();
-      
+
 
       console.log(metadata)
       if (metadata.collection) {
@@ -43,17 +43,20 @@ async function fetchSolanaNfts(solanaAddressInput: string): Promise<NFT[]> {
         externalUrl: external_url,
         attributes: metadata.attributes
       };
-      i=i+1;
-     
-      domainNfts.push(nft);
-      
+      i = i + 1;
+      if (metadata.symbol === "ALERT") {
+      } else {
+        domainNfts.push(nft);
+      }
+
+
     })
 
-        
-      
+
+
   );
 
-  
+
   return domainNfts;
 }
 

@@ -7,7 +7,8 @@
   import fetchNFTsByAddress from "../utils/fetchNFTsByAddress";
   import { ethers } from "ethers";
   import { searchedAddress } from "../store/account";
-    import fetchSolanaNfts from "../utils/fetchSolanaNfts";
+  import fetchSolanaNfts from "../utils/fetchSolanaNfts";
+  import pushNFTsToCollection from "../utils/pushNFTsToCollection";
   let walletAddress = "";
   //0x9552cfce60429863d4a7d8205457ec4aco5857dc
   //0x9552cfce60429863D4A7D8205457EC4AC05857dC
@@ -32,6 +33,11 @@
 
   export const searchEthereumAddress = async (address: string) => {
     //if address starts with 0x
+    if ($nfts && $nfts.length) {
+      nfts.set([]);
+      // pushNFTsToCollection(nfts, []);
+    }
+
     if (address.startsWith("0x")) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log("provider", provider);
@@ -84,11 +90,8 @@
 </script>
 
 <div style="background-color:grey;" class="navbar">
-  <div
-    style="display:flex;flex-direction:column;"
-    class="navbar-start"
-  >
-  <a class="normal-case text-xl">NFT Viewer</a>
+  <div style="display:flex;flex-direction:column;" class="navbar-start">
+    <a class="normal-case text-xl">NFT Viewer</a>
   </div>
 
   <div class="navbar-center">
@@ -121,7 +124,6 @@
         >
       </button>
     </div>
-    
   </div>
   <div class="navbar-end">
     <ConnectWallet />
@@ -133,99 +135,40 @@
   @tailwind components;
   @tailwind utilities;
 
-  .navbar{
-    
+  .navbar {
     position: fixed;
     z-index: 100;
-
   }
-  .navbar-start{
-    align-items:flex-start;
+  .navbar-start {
+    align-items: flex-start;
   }
-  /* #addressLookUp {
-    
-  }
-  #addressLookUpButton {
-    font-size: 10px;
-    background-color: rgba(63, 63, 63, 0.95);
-    height: 35px;
-    margin-top: 20px;
-  } */
-  /* #header {
-    position: fixed;
-    height: 100px;
-    width: 100%;
-    background-color: rgba(63, 63, 63, 0.95);
-    color: white;
-    border-bottom: 1px solid white;
-    vertical-align: middle;
-    overflow: hidden;
-    margin-top: -20px;
-    z-index: 100;
-  } */
-
-  /* #topHeader {
-    display: flex;
-  }
-
-  .headerButtons {
-    width: 20%;
-  }
-
-  #logo {
-    width: 70%;
-    display: flex;
-    margin-left: 10px;
-    font-size: 5px;
-    color: white;
-    vertical-align: middle;
-    padding: 1px;
-  }
-
-  #headerLogo {
-    border: 2px solid whitesmoke;
-    border-radius: 25px;
-    display: flex;
-    width: 125px;
-    min-width: 125px;
-    justify-content: center;
-    align-items: center;
-
-    background-color: whitesmoke;
-    color: black;
-  }
-  .headerButtons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 
   @media screen and (max-width: 600px) {
     .navbar {
       flex-direction: column;
       justify-content: center;
-      align-items:center;
+      align-items: center;
       text-align: center;
-      height:150px;
-      position:absolute;
+      height: 150px;
+      position: absolute;
       /* width:400px; */
     }
-    .navbar-start{
-      display:flex;
+    .navbar-start {
+      display: flex;
       justify-content: center;
-      align-items:center;
+      align-items: center;
       /* text-align: center; */
     }
-    .navbar-center{
-      display:flex;
+    .navbar-center {
+      display: flex;
       justify-content: center;
-      align-items:center;
+      align-items: center;
       /* text-align: center; */
     }
-    .navbar-end{
-      display:flex;
+    .navbar-end {
+      display: flex;
       justify-content: center;
-      align-items:center;
+      align-items: center;
       /* text-align: center; */
     }
   }
