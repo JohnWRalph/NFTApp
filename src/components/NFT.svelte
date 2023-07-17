@@ -98,6 +98,7 @@
         margin: 10px;
         border-radius: 10px;
         transition: 0.65s;
+        color:white;
     }
 
     .nft:hover {

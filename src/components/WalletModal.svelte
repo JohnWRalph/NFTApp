@@ -3,8 +3,15 @@
     import { walletModalStatus } from "../store/walletModal";
     import displayEthereumAddress from "../utils/displayEthereumAddress";
     import displaySolanaAddress from "../utils/displaySolanaAddress";
+    import CopyClipBoard from "./CopyClipBoard.svelte";
     import ConnectEthereumWallet from "./buttons/ConnectEthereumWallet.svelte";
     import ConnectSolanaWallet from "./buttons/ConnectSolanaWallet.svelte";
+    
+    
+    //function to copy ethereum address or solana aaddress to clipboard
+    const copy = () =>{
+        
+    }
 </script>
 
 <div id="myModal" class="modal" style="display:{$walletModalStatus}">
@@ -29,13 +36,24 @@
         </div>
         <div />
     </div>
+    <br>
+    <h1 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">Don't have a wallet?</h1>
+    <h2 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">Use the search bar in the top left corner</h2>
+    <h2 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">Provided Addresses:</h2>
+    <div style="font-size:20px; margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">
+        Ethereum:<br>0x9552cfce60429863D4A7D8205457EC4AC05857dC
+    </div>
+    <br>
+    <div style="font-size:20px; margin-top:0; width:100%;word-wrap:break-word;background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">
+        Solana:<br>6yqm5QUft621gmuVFht6USz1CbkZUwprUpa45HnvrG1m
+        </div>
 </div>
 
 <style>
     #myModal {
         position: fixed;
         background-color: rgba(63, 63, 63, 0.95);
-        top: 97px;
+        top: 64px;
         border: 1px solid white;
         /* border: 2px solid rgb(1, 1, 1); */
         margin-bottom: 5px;
@@ -73,5 +91,13 @@
         display: flex;
       text-align: center;
         
+    }
+
+    @media screen and (max-width: 600px) {
+        #myModal {
+           top:150px;
+           margin-left:0%;
+           width:100%;
+        }
     }
 </style>

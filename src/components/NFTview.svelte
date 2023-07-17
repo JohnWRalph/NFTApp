@@ -29,4 +29,11 @@
     margin-left: 120px;
     }
     
+    @media screen and (max-width: 600px) {
+        .nfts-grid {
+            margin-left: 0px;
+            margin-top:150px;
+            justify-content: center;
+        }
+    }
 </style>

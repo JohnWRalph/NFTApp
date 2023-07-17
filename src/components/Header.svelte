@@ -1,57 +1,157 @@
 <script lang="ts">
-  import ConnectEthereumWallet from "./buttons/ConnectEthereumWallet.svelte";
-
-  import displayEthereumAddress from "../utils/displayEthereumAddress";
-  import { ethereumAccount, solanaAccount } from "../store/account";
-  import displaySolanaAddress from "../utils/displaySolanaAddress";
-  import connectPhantom from "../utils/connectPhantom";
-  import ConnectSolanaWallet from "./buttons/ConnectSolanaWallet.svelte";
   import FilterNfTsByType from "./buttons/filterNFTsByType.svelte";
   import ConnectWallet from "./buttons/ConnectWallet.svelte";
-  import Nft from "./NFT.svelte";
+
   import nfts from "../store/nfts";
+  // import { searchEthereumAddress } from "../utils/searchEthereumAddress";
+  import fetchNFTsByAddress from "../utils/fetchNFTsByAddress";
+  import { ethers } from "ethers";
+  import { searchedAddress } from "../store/account";
+    import fetchSolanaNfts from "../utils/fetchSolanaNfts";
+  let walletAddress = "";
+  //0x9552cfce60429863d4a7d8205457ec4aco5857dc
+  //0x9552cfce60429863D4A7D8205457EC4AC05857dC
+  // async function pushToCollection(address) {
+  //   await fetchNFTsByAddress(address).then((data) => {
+  //     // ToDo: Refactor
+  //     console.log("data", data);
+
+  //     function pushNFTsToCollection($nfts, data) {
+  //       if ($nfts && $nfts.length) {
+  //         $nfts = $nfts.concat(data);
+  //         $nfts.forEach(function (nft, index) {
+  //           nft.index = index;
+  //         });
+  //       } else {
+  //         nfts.set(data);
+  //       }
+  //     }
+  //     pushNFTsToCollection($nfts, data);
+  //   });
+  // }
+
+  export const searchEthereumAddress = async (address: string) => {
+    //if address starts with 0x
+    if (address.startsWith("0x")) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log("provider", provider);
+      // console.log("address",ethers.utils.getAddress(address))
+      if (address.length !== 42) {
+        return false;
+      }
+      try {
+        console.log("address", address);
+        // ethers.utils.getAddress(address);
+        await fetchNFTsByAddress(address).then((data) => {
+          // ToDo: Refactor
+          console.log("data", data);
+          console.log("nfts", $nfts);
+          function pushNFTsToCollection($nfts, data) {
+            if ($nfts && $nfts.length) {
+              $nfts = $nfts.concat(data);
+              $nfts.forEach(function (nft, index) {
+                nft.index = index;
+              });
+            } else {
+              nfts.set(data);
+            }
+          }
+          pushNFTsToCollection(nfts, data);
+        });
+        // console.log("NFTs", $nfts)
+        return true;
+      } catch (e) {
+        return false;
+      }
+    } else {
+      fetchSolanaNfts(address).then((data) => {
+        console.log("data", data);
+        console.log("nfts", $nfts);
+        function pushNFTsToCollection($nfts, data) {
+          if ($nfts && $nfts.length) {
+            $nfts = $nfts.concat(data);
+            $nfts.forEach(function (nft, index) {
+              nft.index = index;
+            });
+          } else {
+            nfts.set(data);
+          }
+        }
+        pushNFTsToCollection(nfts, data);
+      });
+    }
+  };
 </script>
 
-<div id="header">
-  <div id="topHeader">
-    <div id="logo">
-      <h1 id="headerLogo">NFT Viewooor</h1>
-      <input
-        id="addressLookUp"
-        class="walletInput"
-        placeholder="Enter Wallet Address here"
-      />
-      <button id="addressLookUpButton">🔍</button>
-      <div />
-      <button id="fetchLoopring">FetchLooprig</button>
-    </div>
-
-    <div class="headerButtons">
-      <ConnectWallet />
-    </div>
+<div style="background-color:grey;" class="navbar">
+  <div
+    style="display:flex;flex-direction:column;"
+    class="navbar-start"
+  >
+  <a class="normal-case text-xl">NFT Viewer</a>
   </div>
-  <div id="filterBox">
-    {#if $nfts}
-      <FilterNfTsByType />
-    {/if}
+
+  <div class="navbar-center">
+    <div style="display:flex; flex-direction:row;">
+      <input
+        bind:value={walletAddress}
+        style="background-color: black;
+        color: white;width:300px;"
+        type="text"
+        placeholder="Search Ethereum or Solana Address"
+        class="input input-bordered input-ghost"
+      />
+      <button
+        class="btn btn-ghost btn-circle"
+        on:click={() => searchEthereumAddress(walletAddress)}
+        on:click={() => searchedAddress.set(true)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          /></svg
+        >
+      </button>
+    </div>
+    
+  </div>
+  <div class="navbar-end">
+    <ConnectWallet />
   </div>
 </div>
 
-<style>
-  #addressLookUp {
-    margin-top: 25px;
-    margin-left: 20px;
-    height: 25%;
-    min-width: 100px;
-  }
-#addressLookUpButton {
- font-size:10px; 
- background-color: rgba(63, 63, 63, 0.95);
- height:35px;
- margin-top: 20px;
+<style global lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-}
-  #header {
+  .navbar{
+    
+    position: fixed;
+    z-index: 100;
+
+  }
+  .navbar-start{
+    align-items:flex-start;
+  }
+  /* #addressLookUp {
+    
+  }
+  #addressLookUpButton {
+    font-size: 10px;
+    background-color: rgba(63, 63, 63, 0.95);
+    height: 35px;
+    margin-top: 20px;
+  } */
+  /* #header {
     position: fixed;
     height: 100px;
     width: 100%;
@@ -60,22 +160,19 @@
     border-bottom: 1px solid white;
     vertical-align: middle;
     overflow: hidden;
-    margin-top:-20px;
+    margin-top: -20px;
     z-index: 100;
-  }
+  } */
 
-  #topHeader {
-    height: 80%;
+  /* #topHeader {
     display: flex;
   }
 
   .headerButtons {
-   
     width: 20%;
   }
 
   #logo {
-  
     width: 70%;
     display: flex;
     margin-left: 10px;
@@ -93,7 +190,7 @@
     min-width: 125px;
     justify-content: center;
     align-items: center;
-    
+
     background-color: whitesmoke;
     color: black;
   }
@@ -101,5 +198,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  } */
+
+  @media screen and (max-width: 600px) {
+    .navbar {
+      flex-direction: column;
+      justify-content: center;
+      align-items:center;
+      text-align: center;
+      height:150px;
+      position:absolute;
+      /* width:400px; */
+    }
+    .navbar-start{
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      /* text-align: center; */
+    }
+    .navbar-center{
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      /* text-align: center; */
+    }
+    .navbar-end{
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      /* text-align: center; */
+    }
   }
 </style>

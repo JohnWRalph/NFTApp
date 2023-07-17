@@ -3,7 +3,7 @@
 import Header from "./components/Header.svelte";
 import NfTview from "./components/NFTview.svelte";
   import WalletModal from "./components/WalletModal.svelte";
-import {ethereumAccount, solanaAccount} from "./store/account";
+import {ethereumAccount, searchedAddress, solanaAccount} from "./store/account";
 
   import NftModal from "./components/NFTModal.svelte";
 let visible=true;
@@ -23,6 +23,7 @@ let showing = true
 
 <div>
 <Header/>
+
 </div>
 <div>
 
@@ -38,10 +39,17 @@ let showing = true
 {/if}
 
 
-{#if $ethereumAccount || $solanaAccount}
+{#if $ethereumAccount || $solanaAccount || $searchedAddress}
 <NfTview />
 {:else}
+<!-- <div style="background-color:black; height:100vh; width:100vw;"></div> -->
 Connect a Wallet
 {/if}
 
 <NftModal/>
+
+<style global lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+</style>

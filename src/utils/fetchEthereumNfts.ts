@@ -3,7 +3,7 @@ import { Network, Alchemy } from "alchemy-sdk";
 
 async function fetchEthereumNfts(address: string): Promise<NFT[]> {
     const settings = {
-        apiKey: "9kNXbHSC4XEBluKh72dg644UOMK74Y7C", // Replace with your Alchemy API Key.
+        apiKey: import.meta.env.VITE_API_KEY, // Replace with your Alchemy API Key.
         network: Network.ETH_MAINNET, // Replace with your network.
     };
     const alchemy = new Alchemy(settings);

@@ -21,5 +21,7 @@
   height:40px;
   width:130px;
   min-width: 130px;
+  background-color: black;
+  color:white;
 }
 </style>
