@@ -39,7 +39,9 @@
     }
 
     if (address.startsWith("0x")) {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.JsonRpcProvider(
+        import.meta.env.VITE_RPC_URL
+      );
       console.log("provider", provider);
       // console.log("address",ethers.utils.getAddress(address))
       if (address.length !== 42) {

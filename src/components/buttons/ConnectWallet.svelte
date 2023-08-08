@@ -3,7 +3,7 @@
   
 </script>
 
-<button id="openWalletButton"
+<button style="width:150px" id="openWalletButton"
   on:click={async () => {
     console.log($walletModalStatus);
     if ($walletModalStatus === "none") {
