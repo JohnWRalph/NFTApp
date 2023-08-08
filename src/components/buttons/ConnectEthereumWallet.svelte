@@ -50,56 +50,6 @@
   }}>{$buttonMetaMask}</button
 >
 
-<button
-  id="connectGMEbutton"
-  class="connectWalletButton"
-  on:click={async () => {
-    if ($extensionGME === true) {
-      await connectGME().then((address) =>
-        fetchNFTsByAddress(address).then((data) => {
-          // ToDo: refactor
-          function pushNFTsToCollection($nfts, data) {
-            if ($nfts && $nfts.length) {
-              $nfts = $nfts.concat(data);
-            } else {
-              $nfts.set(data);
-            }
-          }
-          pushNFTsToCollection($nfts, data);
-          $nfts.forEach(function (nft, index) {
-            nft.index = index;
-          });
-        })
-      );
-    } else {
-      window.open("https://wallet.gamestop.com/");
-    }
-  }}>{$buttonGME}</button
->
-
-<!-- <button 
-id="connectCoinBasebutton" class="connectWalletButton"
-  on:click={async () => {
-    if ($extensionGME === true) {
-      await connectCoinbase().then((address) =>
-        fetchNFTsByAddress(address).then((data) => {
-          // ToDo: Refactor
-          function pushNFTsToCollection(chainAccount, data) {
-            if ($nfts && $nfts.length) {
-              console.log(chainAccount);
-              $nfts = $nfts.concat(data);
-            } else {
-              nfts.set(data);
-            }
-          }
-          pushNFTsToCollection(ethereumAccount, data);
-        })
-      );
-    } else {
-      window.open("https://www.coinbase.com/wallet/downloads");
-    }
-  }}>{$buttonCoinbase}</button
-> -->
 <style>
   .connectWalletButton {
     width: 200px;

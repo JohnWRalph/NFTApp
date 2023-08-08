@@ -66,6 +66,7 @@
         z-index: 100;
         /* width: 100%; */
         margin-left: 70%;
+        overflow-y: scroll;
     }
 
     .modal {
@@ -96,7 +97,8 @@
     #walletButtons {
         display: flex;
       text-align: center;
-        
+      align-items: center;
+        justify-content: center;
     }
 
     @media screen and (max-width: 600px) {
