@@ -43,8 +43,7 @@
         <div />
     </div>
     <br>
-    <h1 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">Don't have a wallet?</h1>
-    <h2 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">Use the search bar in the top left corner</h2>
+    <h1 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%;">Don't have a wallet?</h1>
     <h2 style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">Sample Addresses:</h2>
     <div style="font-size:20px; margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">
         Ethereum:<br>0x9552cfce60429863D4A7D8205457EC4AC05857dC
@@ -66,7 +65,7 @@
         z-index: 100;
         /* width: 100%; */
         margin-left: 70%;
-        overflow-y: scroll;
+      
     }
 
     .modal {
@@ -74,25 +73,8 @@
         width: 30%;
         height: 100%;
         transition: transform 1s ease-out, opacity 1s ease-out;
-        /* Add a transition to the transform and opacity properties */
     }
-    /* .close {
-        color: rgb(208, 200, 200);
-        float: left;
-        margin-left: 00px;
-        font-size: 50px;
-        font-weight: bold;
-        width: 5px;
-        height: 100%;
-        background-color: rgb(255, 255, 255);
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-    } */
-
-    /* .modal.close {
-        transform: translateX(23%);
-        transition: transform 3s ease-out;
-    } */
+ 
 
     #walletButtons {
         display: flex;
