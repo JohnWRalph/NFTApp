@@ -4,6 +4,7 @@
 
 #app{
   background-color: black;
+  position:absolute;
 }
 
 
@@ -20,6 +21,7 @@ a {
 }
 body{
   height:100vh;
+  overflow-x: hidden;
 }
 a:hover {
   color: #535bf2;

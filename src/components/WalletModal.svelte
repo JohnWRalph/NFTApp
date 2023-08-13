@@ -6,7 +6,7 @@
     import CopyClipBoard from "./CopyClipBoard.svelte";
     import ConnectEthereumWallet from "./buttons/ConnectEthereumWallet.svelte";
     import ConnectSolanaWallet from "./buttons/ConnectSolanaWallet.svelte";
-    
+    import { fly } from 'svelte/transition'
     
     //function to copy ethereum address or solana aaddress to clipboard
     const copy = () =>{
@@ -14,31 +14,16 @@
     }
 </script>
 
-<div id="myModal" class="modal" style="display:{$walletModalStatus}">
+<div 
+
+id="myModal" class="modal" style="display:{$walletModalStatus}">
     <!-- <span class="close">&times;</span> -->
 
     <div id="walletButtons">
         <div>
-            {#if $ethereumAccount}
-            <div style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">
-
-                {"Connected Ethereum Account: " +
-                    displayEthereumAddress($ethereumAccount)}
-            </div>
-                <!-- <DisconnectEthereum/> -->
-            {:else}
-                <ConnectEthereumWallet />
-            {/if}
+       
        <br>
-            {#if $solanaAccount}
-            <div style=" margin-top:0; width:100%;word-wrap:break-word; background-color:black;color:white;width:90%;border-radius:15px; text-align:center;margin-left:5%">
-                {"Connected Solana Account: " +
-                    displaySolanaAddress($solanaAccount)}
-            </div>
-                
-            {:else}
-                <ConnectSolanaWallet />
-            {/if}
+     
         </div>
         <div />
     </div>
@@ -56,15 +41,17 @@
 
 <style>
     #myModal {
-        position: fixed;
+        position: absolute;
+        height:85%;
         background-color: rgba(63, 63, 63, 0.95);
-        top: 64px;
+        top: 70px;
         border: 1px solid white;
+        border-radius:20px;
         /* border: 2px solid rgb(1, 1, 1); */
         margin-bottom: 5px;
-        z-index: 100;
+        z-index: 1000;
         /* width: 100%; */
-        margin-left: 70%;
+        margin-left: 68%;
       
     }
 
@@ -81,6 +68,7 @@
       text-align: center;
       align-items: center;
         justify-content: center;
+        z-index:1000;
     }
 
     @media screen and (max-width: 600px) {

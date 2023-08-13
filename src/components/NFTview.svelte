@@ -1,11 +1,12 @@
 <script land="ts">
    
     import nfts from "../store/nfts";
+    import { blur } from "../store/visible";
     import Nft from "./NFT.svelte";
 </script>
 
 {#if $nfts && $nfts.length}
-<div class="nfts-grid">
+<div class="nfts-grid" >
     {#each $nfts as nft}
     
     <Nft {nft}/>

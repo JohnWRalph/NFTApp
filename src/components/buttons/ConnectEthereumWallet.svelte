@@ -17,14 +17,14 @@
   extensionGME.set(true);
   extensionMetaMask.set(true);
   extensionCoinbase.set(true);
-  buttonMetaMask.set("Connect MetaMask Wallet");
+  buttonMetaMask.set("Connect MetaMask");
   buttonGME.set("Connect GameStop Wallet");
   buttonCoinbase.set("Connect Coinbase Wallet");
 </script>
 
 <button
   id="connectMetaMaskButton"
-  class="connectWalletButton"
+  class="connectWalletButton btn btn-neutral btn-wide"
   on:click={async () => {
     if ($extensionMetaMask === true) {
       await connectMetaMask().then((address) =>
@@ -47,12 +47,15 @@
     } else {
       window.open("https://metamask.io/");
     }
-  }}>{$buttonMetaMask}</button
+  }}><img style="height:30px;" src="/metamask.svg" alt="">{$buttonMetaMask}</button
 >
 
-<style>
+<style global lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
   .connectWalletButton {
-    width: 200px;
+   
     margin: 10px;
   }
 </style>

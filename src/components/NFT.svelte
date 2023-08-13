@@ -106,8 +106,9 @@
     }
 
     img {
-        height: 100%;
-        max-width: 90%;
+        
+        max-width: 100%;
+        border-radius: 10px;
         /* contain: content; */
         /* max-width: fit-content; */
         /* overflow-x: hidden; */
@@ -148,5 +149,7 @@
     }
     #nftCard {
         z-index: 5;
+        background-color: rgb(73, 73, 73);
+        cursor:pointer;
     }
 </style>

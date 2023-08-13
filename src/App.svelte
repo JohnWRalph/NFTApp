@@ -6,7 +6,8 @@ import NfTview from "./components/NFTview.svelte";
 import {ethereumAccount, searchedAddress, solanaAccount} from "./store/account";
 
   import NftModal from "./components/NFTModal.svelte";
-let visible=true;
+    import {visible,blur} from "./store/visible";
+    import { fade } from 'svelte/transition';
 
 
 function swoop() {
@@ -25,17 +26,11 @@ let showing = true
 <Header/>
 
 </div>
-<div>
 
+{#if $visible}
+<div transition:fly="{{ x: 50, duration: 100 }}">
+  <WalletModal/>
 </div>
-<WalletModal/>
-
-
-{#if visible}
-<p transition:fly="{{ y: 200, duration: 2000 }}">
-  Flies in and out
-</p>
-
 {/if}
 
 

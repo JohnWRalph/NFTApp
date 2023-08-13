@@ -1,18 +1,25 @@
-<script lang = "ts">
-   
-export let attribute;
+<script lang="ts">
+    export let attribute;
 </script>
 
-<div class="individualAttributes">
-    {attribute.trait_type}<br>
-    {attribute.value}
+<div class="attributeContainers">
+    <div class="attribute">
+        {attribute.trait_type}
+    </div>
+    <div class="attributeBottom">
+        {attribute.value}
+    </div>
 </div>
 
 <style>
-    .individualAttributes {
-        border: 1px solid black;
-        width:20%;
+    .attributeContainers {
+      background-color:grey;
+        width: 20%;
         text-align: center;
         margin: 5px;
+        border-radius: 5px;
+    }
+    .attributeBottom{
+        border-top:1px solid black;
     }
 </style>

@@ -35,77 +35,104 @@
 <!-- <button on:click={() => modal.show()}>Show Button</button> -->
 <Modal bind:this={modal} on:click={createModal}>
     <div id="modalNFT">
+        <button on:click={() => hide()} class="btn btn-square closeButton">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                /></svg
+            >
+        </button>
         <div id="modalTop">
             <img id="modalImage" src={$nftModalImage} alt="nft image here" />
-            <button
-            on:click={() => hide()}
-            class="btn btn-square closeButton">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    ><path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    /></svg
-                >
-            </button>
         </div>
-        <div id="nftDetails">
-            <div id="modalTitle">
-                <h1>{$nftModalName}</h1>
-            </div>
-        </div>
-        <div id="collectionDetails">
-            <div id="collectionName">
-                <h2>Collection: {$modalTitle}</h2>
-            </div>
-            {#if $nftModalCreator}
-                <div id="creator"><h2>Created by: {$nftModalCreator}</h2></div>
-            {/if}
-            {#if $nftModalDescription}
-                <div id="modalDescription">
-                    <h3>{$nftModalDescription}</h3>
+        <div class="overflow-x-auto modalDetails">
+            <table class="table table-zebra">
+                <thead style="background-color:grey;color:white;">
+                    <tr style="background-color:grey;color:white;">
+                        <th style="background-color:grey;color:white;">Name</th>
+                        {#if $nftModalName}
+                            <th style="background-color:grey;color:white;"
+                                >{$nftModalName}</th
+                            >
+                        {:else}
+                            <td>-</td>
+                        {/if}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Collection:</th>
+                        {#if $modalTitle}
+                            <td>{$modalTitle}</td>
+                        {:else}
+                            <td>-</td>
+                        {/if}
+                    </tr>
+
+                    <tr style="background-color:grey;color:white;">
+                        <th>Created by:</th>
+                        {#if $nftModalCreator}
+                            <td>{$nftModalCreator}</td>
+                        {:else}
+                            <td>-</td>
+                        {/if}
+                    </tr>
+
+                    <tr>
+                        <th>Description:</th>
+                        {#if $nftModalDescription}
+                            <td>{$nftModalDescription}</td>
+                        {:else}
+                            <td>-</td>
+                        {/if}
+                    </tr>
+
+                    <tr style="background-color:grey;color:white;">
+                        <th>External Link:</th>
+                        {#if $nftModalExternalUrl.length}
+                            <td>{$nftModalExternalUrl}</td>
+                        {:else}
+                            <td>-</td>
+                        {/if}
+                    </tr>
+
+                    <tr>
+                        <th>Creator:</th>
+                        {#if $nftModalCreator}
+                            <td>{$nftModalCreator}</td>
+                        {:else}
+                            <td>-</td>
+                        {/if}
+                    </tr>
+                    <tr />
+                </tbody>
+            </table>
+            {#if $nftModalAttributes && $nftModalNftType === 2}
+                <div style="text-align:center; margin-top:20px;">
+                    <h1 style="font-size:1.5rem;">Attributes</h1>
+                    <div id="attributeContainer">
+                        {#each $nftModalAttributes as attribute}
+                            <NfTattributes {attribute} />
+                        {/each}
+                    </div>
                 </div>
             {/if}
         </div>
-        <div>
-            <div id="creatorBox">
-                {#if $nftModalExternalUrl.length}
-                    <div class="externalLink">
-                        <h3>External Link: {$nftModalExternalUrl}</h3>
-                    </div>
-                {/if}
-                <!-- <div class="externalLink">external link</div> -->
-            </div>
-        </div>
-        {#if $nftModalAttributes && $nftModalNftType === 2}
-            <div id="attributeContainer">
-                {#each $nftModalAttributes as attribute}
-                    <NfTattributes {attribute} />
-                {/each}
-            </div>
-        {/if}
-        <!-- <div id="contractDetailsSection">
-            <div class="contractDetails">Contract Adress</div>
-            <div class="contractDetails">TokenType</div>
-            <div class="contractDetails">Contract Adress</div>
-            <div class="contractDetails">Contract Adress</div>
-        </div> -->
-        <div>
-            <!-- {$nftModalNftType} -->
-        </div>
-    </div></Modal
->
+    </div>
+</Modal>
 
 <style global lang="postcss">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
     #attributeContainer {
         display: flex;
         flex-wrap: wrap;
@@ -113,10 +140,11 @@
         margin-left: 10%;
         margin-top: 10px;
     }
-    .closeButton{
-        position:absolute;
-      right:20px;
-        top:20px;
+    .closeButton {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        z-index: 100;
     }
     #creator {
         width: 100%;
@@ -156,8 +184,11 @@
     .externalLink {
         width: 100%;
     }
+    .modalDetails {
+        width: 50%;
+    }
     #modalNFT {
-        width: 600px;
+        width: 1100px;
         /* min-width: 600px; */
         height: 90%;
         background-color: rgb(59, 54, 54);
@@ -166,6 +197,11 @@
         scrollbar-width: thin;
         border-radius: 10px;
         color: white;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        border-bottom-right-radius: 200px;
+        box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, 0.7);
     }
     textarea {
         position: fixed;
@@ -185,30 +221,26 @@
 
     #modalTop {
         /* width: 70%; */
-        height: 80%;
+        height: 100%;
+        /* width:450px; */
         background-color: black;
         display: flex;
         justify-content: center;
         position: relative;
     }
     #modalBottom {
-        width: 100%;
-        height: 30%;
     }
     #modalImage {
         /* height: 100%; */
+        width: 100%;
     }
 
     @media screen and (max-width: 600px) {
         #modalNFT {
             width: 100%;
-           
         }
         #modalTop {
-            width:100%;
+            width: 100%;
         }
-
-     
-       
     }
 </style>

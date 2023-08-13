@@ -10,12 +10,13 @@
   import fetchSolanaNfts from "../../utils/fetchSolanaNfts";
 
   extensionSolana.set(true);
-  buttonSolana.set("Connect Phantom Wallet");
+  buttonSolana.set("Connect Phantom");
   // buttonSolanaActive.disabled = false;
 </script>
 
 <button
   id="connectSolanaButton"
+  class="connectWalletButton btn btn-neutral btn-wide"
   on:click={async () => {
     if ($extensionSolana === true) {
       await connectPhantom().then((address) =>
@@ -36,9 +37,16 @@
     } else {
       window.open("https://phantom.app/download");
     }
-  }}>{$buttonSolana}</button
+  }}><img style="height:30px;" src="/phantom.png" alt="">{$buttonSolana}</button
 >
 
 <!-- <button on:click={}</button> -->
-<style>
-</style>
+  <style global lang="postcss">
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    .connectWalletButton {
+     
+      margin: 10px;
+    }
+  </style>
